@@ -132,7 +132,6 @@ def main(_):
 
         if FLAGS.train:
             dcgan.train(FLAGS)
-            mox.file.copy_parallel(src_url="/cache/out/", dst_url=FLAGS.train_url)
         else:
             load_success, load_counter = dcgan.load(FLAGS.checkpoint_dir)
             if not load_success:
@@ -156,7 +155,7 @@ def main(_):
             if FLAGS.visualize:
                 OPTION = 1
                 visualize(sess, dcgan, FLAGS, OPTION, FLAGS.sample_dir)
-    mox.file.copy_parallel(src_url="/cache/out/", dst_url=FLAGS.train_url)
+    mox.file.copy_parallel(src_url="./out", dst_url=FLAGS.train_url)
 
 
 if __name__ == '__main__':
