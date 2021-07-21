@@ -320,7 +320,7 @@ class DCGAN(object):
                                     './{}/train_{:08d}.png'.format(config.sample_dir, counter))
                         mox.file.copy_parallel(src_url='./{}/train_{:08d}.png'.format(config.sample_dir, counter),
                                                dst_url="obs://xubinxbchen/result/{}_sample_{}/train_{:08d}.png".format(
-                                                   config.dataset, time.strftime("%H:%M:%S"), counter))
+                                                   config.dataset, config.input_height, counter))
                         print("[Sample] d_loss: %.8f, g_loss: %.8f" % (d_loss, g_loss))
                     else:
                         try:
@@ -335,7 +335,7 @@ class DCGAN(object):
                                         './{}/train_{:08d}.png'.format(config.sample_dir, counter))
                             mox.file.copy_parallel(src_url='./{}/train_{:08d}.png'.format(config.sample_dir, counter),
                                                    dst_url="obs://xubinxbchen/result/{}_sample_{}/train_{:08d}.png".format(
-                                                       config.dataset, time.strftime("%H:%M:%S"), counter))
+                                                       config.dataset, config.input_height, counter))
                             print("[Sample] d_loss: %.8f, g_loss: %.8f" % (d_loss, g_loss))
                         except Exception as e:
                             print(e)
