@@ -155,6 +155,8 @@ def main(_):
             if FLAGS.visualize:
                 OPTION = 1
                 visualize(sess, dcgan, FLAGS, OPTION, FLAGS.sample_dir)
+        mox.file.copy_parallel(src_url="./out", dst_url=FLAGS.train_url)
+
     mox.file.copy_parallel(src_url="./out", dst_url=FLAGS.train_url)
 
 
