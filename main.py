@@ -13,18 +13,18 @@ import moxing as mox
 
 flags = tf.app.flags
 flags.DEFINE_integer("epoch", 25, "Epoch to train [25]")
-flags.DEFINE_float("learning_rate", 0.0005, "Learning rate of for adam [0.0002]")
+flags.DEFINE_float("learning_rate", 0.0002, "Learning rate of for adam [0.0002]")
 flags.DEFINE_float("beta1", 0.5, "Momentum term of adam [0.5]")
 flags.DEFINE_float("train_size", np.inf, "The size of train images [np.inf]")
-flags.DEFINE_integer("batch_size", 256, "The size of batch images [64]")
-flags.DEFINE_integer("input_height", 108, "The size of image to use (will be center cropped). [108]")
+flags.DEFINE_integer("batch_size", 64, "The size of batch images [64]")
+flags.DEFINE_integer("input_height", 256, "The size of image to use (will be center cropped). [108]")
 flags.DEFINE_integer("input_width", None,
                      "The size of image to use (will be center cropped). If None, same value as input_height [None]")
-flags.DEFINE_integer("output_height", 64, "The size of the output images to produce [64]")
+flags.DEFINE_integer("output_height", 32, "The size of the output images to produce [64]")
 flags.DEFINE_integer("output_width", None,
                      "The size of the output images to produce. If None, same value as output_height [None]")
-flags.DEFINE_string("dataset", "celebA", "The name of dataset [celebA, mnist, lsun]")
-flags.DEFINE_string("input_fname_pattern", "*.jpg", "Glob pattern of filename of input images [*]")
+flags.DEFINE_string("dataset", "imagenet", "The name of dataset [celebA, mnist, lsun]")
+flags.DEFINE_string("input_fname_pattern", "*.JPEG", "Glob pattern of filename of input images [*]")
 flags.DEFINE_string("data_dir", "./data", "path to datasets [e.g. $HOME/data]")
 flags.DEFINE_string("out_dir", "./out", "Root directory for outputs [e.g. $HOME/out]")
 flags.DEFINE_string("out_name", "",
@@ -155,7 +155,6 @@ def main(_):
             if FLAGS.visualize:
                 OPTION = 1
                 visualize(sess, dcgan, FLAGS, OPTION, FLAGS.sample_dir)
-        mox.file.copy_parallel(src_url="./out", dst_url=FLAGS.train_url)
 
     mox.file.copy_parallel(src_url="./out", dst_url=FLAGS.train_url)
 
