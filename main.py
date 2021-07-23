@@ -52,6 +52,8 @@ FLAGS = flags.FLAGS
 def main(_):
     pp.pprint(flags.FLAGS.__flags)
     mox.file.copy_parallel(FLAGS.data_url, './data/{}/'.format(FLAGS.dataset))
+    os.environ["TUNE_BANK_PATH"] = "/cache/AutoTune_Bank"
+    os.mkdir("/cache/AutoTune_Bank")
 
     # expand user name and environment variables
     FLAGS.data_dir = expand_path(FLAGS.data_dir)
@@ -87,7 +89,9 @@ def main(_):
     config = tf.ConfigProto()
     custom_op = config.graph_options.rewrite_options.custom_optimizers.add()
     custom_op.name = "NpuOptimizer"
+    custom_op.parameter_map["auto_tune_mode"].s = tf.compat.as_bytes("RL,GA")
     config.graph_options.rewrite_options.remapping = RewriterConfig.OFF
+    config = NPURunConfig(auto_tune_mode="RL,GA", session_config=config)
 
     with tf.Session(config=config) as sess:
         if FLAGS.dataset == 'mnist':
@@ -157,6 +161,7 @@ def main(_):
                 visualize(sess, dcgan, FLAGS, OPTION, FLAGS.sample_dir)
 
     mox.file.copy_parallel(src_url="./out", dst_url=FLAGS.train_url)
+    mox.file.copy_parallel("/cache/AutoTune_Bank", FLAGS.train_url)
 
 
 if __name__ == '__main__':
