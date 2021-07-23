@@ -52,8 +52,12 @@ FLAGS = flags.FLAGS
 def main(_):
     pp.pprint(flags.FLAGS.__flags)
     mox.file.copy_parallel(FLAGS.data_url, './data/{}/'.format(FLAGS.dataset))
+    # 生成AutoTune
     os.environ["TUNE_BANK_PATH"] = "/cache/AutoTune_Bank"
     os.mkdir("/cache/AutoTune_Bank")
+    # 使用AutoTune
+    # mox.file.copy_parallel("s3://xubinxbchen/AutoTune_Bank", '/cache/')
+    # os.environ["TUNE_BANK_PATH"] = '/cache/AutoTune_Bank'
 
     # expand user name and environment variables
     FLAGS.data_dir = expand_path(FLAGS.data_dir)

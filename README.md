@@ -1,5 +1,3 @@
-dataset=faces;input_height=64;input_width=64;train=true;crop=true;input_fname_pattern=*.jpg
-
 ### DCGAN
 
 ### 概述
@@ -40,6 +38,9 @@ OBS桶地址：obs://xubinxbchen/imagenet/
 ### 训练过程及结果
 
 
+### ModelArts参数
+```dataset=imagenet;input_height=256;input_width=256;train=true;crop=true;input_fname_pattern=*.JPEG;epoch=5;learning_rate=0.0002;batch_size=64;out_name=""```
+
 
 ### 执行训练
 
@@ -59,3 +60,6 @@ input_height:
 output_height: 
 
 ```
+
+### AutoTune调优
+https://support.huaweicloud.com/tensorflow-cann330alpha2training/atlasmprtg_13_0054.html
