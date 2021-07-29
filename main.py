@@ -20,7 +20,7 @@ flags.DEFINE_integer("batch_size", 64, "The size of batch images [64]")
 flags.DEFINE_integer("input_height", 256, "The size of image to use (will be center cropped). [108]")
 flags.DEFINE_integer("input_width", None,
                      "The size of image to use (will be center cropped). If None, same value as input_height [None]")
-flags.DEFINE_integer("output_height", 32, "The size of the output images to produce [64]")
+flags.DEFINE_integer("output_height", 64, "The size of the output images to produce [64]")
 flags.DEFINE_integer("output_width", None,
                      "The size of the output images to produce. If None, same value as output_height [None]")
 flags.DEFINE_string("dataset", "imagenet", "The name of dataset [celebA, mnist, lsun]")
